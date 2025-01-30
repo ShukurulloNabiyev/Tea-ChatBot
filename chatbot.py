@@ -6,7 +6,6 @@ from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.embeddings import OpenAIEmbeddings
 
-@st.cache_resource
 def loading(api_key):
     loader = PyPDFLoader("tea.pdf")
     documents = loader.load()
@@ -29,7 +28,7 @@ def chatbot_page():
 
     if "chat_history" not in st.session_state:
         st.session_state.chat_history = [
-            {"role": "bot", "content": "Hello! I can answer questions about the book by V. V. Pokhlebkin 'Tea, its history, properties and use'. Ask questions, and I will try to help!"}
+            {"role": "chatbot", "content": "Hello! I can answer questions about the book by V. V. Pokhlebkin 'Tea, its history, properties and use'. Ask questions, and I will try to help!"}
         ]
 
     retriever = loading(st.session_state["api_key"])
@@ -62,7 +61,7 @@ def chatbot_page():
             )
             result = chain.invoke({"history": history, "context": context, "question": user_input})
 
-        st.session_state.chat_history.append({"role": "bot", "content": result.content})
+        st.session_state.chat_history.append({"role": "chatbot", "content": result.content})
 
     for entry in st.session_state.chat_history:
         if entry["role"] == "user":
