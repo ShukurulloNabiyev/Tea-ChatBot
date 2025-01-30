@@ -7,8 +7,6 @@ This project is a simple chatbot built using **Streamlit** and **LangChain**. Th
 
 ![Alt text](image.png)
 
-Link to the Streamlit application: 
-
 ---
 
 ## ⛏️ Project Architecture  
